@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 // Components
-import Sidebar from "../Nav/Sidebar";
+import Sidebar from "./SidebarConnected";
 import Backdrop from "../Elements/Backdrop";
 // Assets
 import LogoIcon from "../../assets/svg/Logo";
@@ -36,23 +36,23 @@ export default function TopNavbar() {
             <h1 style={{ marginLeft: "15px" }} className="font20 extraBold">
               fanatic
             </h1>
-          </Link>
+          </Link> 
           <BurderWrapper className="pointer" onClick={() => toggleSidebar(!sidebarOpen)}>
             <BurgerIcon />
           </BurderWrapper>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
                 Accueil
               </Link>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="about" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
                 A propos
               </Link>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
                 Services
               </Link>
             </li>
@@ -62,7 +62,7 @@ export default function TopNavbar() {
               </NavLink>
             </li>
             <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="contact" spy={true} smooth={true} offset={-80}>
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="/" spy={true} smooth={true} offset={-80}>
                 Contact
               </Link>
             </li>

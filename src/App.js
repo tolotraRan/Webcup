@@ -6,6 +6,7 @@ import Signup from "./components/Singup";
 import Login from "./components/Login";
 import TopNavbar from "./components/Nav/TopNavbar.jsx";
 import TopNavbarConnected from "./components/Nav/TopNavbarConnected.jsx";
+import Rdv from "./components/Sections/Rdv.jsx";
 
 export default function App() {
   const user = localStorage.getItem("token");
@@ -18,19 +19,20 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;800&display=swap" rel="stylesheet" />
       </Helmet>
       <Router>
-        {/* Affichez TopNavbar ou TopNavbarConnected en fonction de la présence du token */}
-        {user ? <TopNavbarConnected /> : <TopNavbarWrapper />}
+        {user ? <TopNavbarWrapperConnected /> : <TopNavbarWrapper />}
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* Empêchez l'accès à la route /signup si l'utilisateur est déjà connecté */}
           <Route
             path="/signup"
             element={user ? <Navigate to="/" /> : <Signup />}
           />
-          {/* Empêchez l'accès à la route /login si l'utilisateur est déjà connecté */}
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/rdv"
+            element={!user ? <Navigate to="/" /> : <Rdv />}
           />
         </Routes>
       </Router>
@@ -40,9 +42,17 @@ export default function App() {
 
 function TopNavbarWrapper() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup";
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/rdv";
   if (isLoginPage) {
     return null;
   }
   return <TopNavbar />;
+}
+function TopNavbarWrapperConnected() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/rdv";
+  if (isLoginPage) {
+    return null;
+  }
+  return <TopNavbarConnected />;
 }

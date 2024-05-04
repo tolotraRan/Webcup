@@ -6,6 +6,11 @@ import CloseIcon from "../../assets/svg/CloseIcon";
 import LogoIcon from "../../assets/svg/Logo";
 
 export default function Sidebar({ sidebarOpen, toggleSidebar }) {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <Wrapper className="animate darkBg" sidebarOpen={sidebarOpen}>
       <SidebarHeader className="flexSpaceCenter">
@@ -34,7 +39,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           >
             Accueil
           </Link>
-        </li>
+          </li>
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
@@ -63,7 +68,6 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
             Services
           </Link>
         </li>
-        
         <li className="semiBold font15 pointer">
           <Link
             onClick={() => toggleSidebar(!sidebarOpen)}
@@ -79,18 +83,14 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           </Link>
         </li>
       </UlStyle>
-      <UlStyle className="flexSpaceCenter">
-        <li className="semiBold font15 pointer">
-          <a href="/login" style={{ padding: "10px 30px 10px 0" }} className="whiteColor">
-            Log in
-          </a>
-        </li> 
+
+      <CenteredDiv>
         <li className="semiBold font15 pointer flexCenter">
-          <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-            Get Started
+          <a href="/" onClick={handleLogout} className="radius8 lightBg" style={{ padding: "10px 25px" }}>
+            Logout
           </a>
         </li>
-      </UlStyle>
+      </CenteredDiv>
     </Wrapper>
   );
 }
@@ -107,18 +107,27 @@ const Wrapper = styled.nav`
     width: 100%;
   }
 `;
+
 const SidebarHeader = styled.div`
   padding: 20px 0;
 `;
+
 const CloseBtn = styled.button`
   border: 0px;
   outline: none;
   background-color: transparent;
   padding: 10px;
 `;
+
 const UlStyle = styled.ul`
   padding: 40px;
   li {
     margin: 20px 0;
   }
+`;
+
+const CenteredDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: auto; /* Pour aligner le contenu en bas */
 `;
