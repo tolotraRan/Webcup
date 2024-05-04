@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
-import { NavLink } from "react-router-dom"; // Ajoutez NavLink pour les liens internes de React Router
 
 // Components
 import Sidebar from "../Nav/Sidebar";
@@ -20,7 +19,10 @@ export default function TopNavbar() {
       window.removeEventListener("scroll", () => setY(window.scrollY));
     };
   }, [y]);
-
+  const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
 
   return (
     <>
@@ -53,21 +55,11 @@ export default function TopNavbar() {
                 Services
               </Link>
             </li>
-            {/* <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="About" spy={true} smooth={true} offset={-80}>
-                A propos
+            <li className="semiBold font15 pointer">
+              <Link activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
+                Rend de vous
               </Link>
-            </li> */}
-            {/* <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="blog" spy={true} smooth={true} offset={-80}>
-                Blog
-              </Link>
-            </li> */}
-            {/* <li className="semiBold font15 pointer">
-              <Link activeClass="active" style={{ padding: "10px 15px" }} to="pricing" spy={true} smooth={true} offset={-80}>
-                Pricing
-              </Link>
-            </li> */}
+            </li>
             <li className="semiBold font15 pointer">
               <Link activeClass="active" style={{ padding: "10px 15px" }} to="contact" spy={true} smooth={true} offset={-80}>
                 Contact
@@ -75,14 +67,9 @@ export default function TopNavbar() {
             </li>
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
-            <li className="semiBold font15 pointer">
-            <NavLink to="/login" style={{ padding: "10px 30px 10px 0" }}> {/* Utilisez NavLink pour les liens internes */}
-                Log in
-              </NavLink>
-            </li>
             <li className="semiBold font15 pointer flexCenter">
-              <a href="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-                Get Started
+              <a href="/" onClick={handleLogout} className="radius8 lightBg" style={{ padding: "10px 25px" }}>
+                Logout
               </a>
             </li>
           </UlWrapperRight>

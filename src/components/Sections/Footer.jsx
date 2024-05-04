@@ -28,7 +28,7 @@ export default function Contact() {
             <Link className="whiteColor animate pointer font13" to="home" smooth={true} offset={-80}>
               Back to top
             </Link>
-          </InnerWrapper>
+          </InnerWrapper> 
         </div>
       </div>
     </Wrapper>

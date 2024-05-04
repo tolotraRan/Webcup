@@ -269,3 +269,8 @@
   .whiteBg {
     background-color: #fff;
   }
+  .inactive {
+    text-decoration: none;
+    color: gray;
+  
+  }
