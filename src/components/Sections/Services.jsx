@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// Components
-import ServiceBox from "../Elements/ServiceBox";
-// Assets
+import axios from "axios";
+import Card from "../Cards/Card";
+
 export default function Services() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const response = await axios.get("http://localhost:8080/api/services"); 
+        setServices(response.data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    }
+    fetchServices();
+  }, []);
+
+  // Filtrer les services pour n'afficher que le premier service pour chaque nom de service unique
+  const uniqueServices = services.filter((service, index, self) =>
+    index === self.findIndex((s) => s.nomservice === service.nomservice)
+  );
+
   return (
     <Wrapper id="services">
       <div className="whiteBg" style={{ padding: "60px 0" }}>
@@ -15,32 +34,14 @@ export default function Services() {
               <br />
               labore et dolore magna aliquyam erat, sed diam voluptua.
             </p>
+            <br />
+            <br />
           </HeaderInfo>
           <ServiceBoxRow className="flex">
-            <ServiceBoxWrapper>
-              <ServiceBox
-                icon="roller"
-                title="Graphic Design"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
-              />
-            </ServiceBoxWrapper>
-            <ServiceBoxWrapper>
-              <ServiceBox
-                icon="monitor"
-                title="Web Design"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
-              />
-            </ServiceBoxWrapper>
-            <ServiceBoxWrapper>
-              <ServiceBox
-                icon="browser"
-                title="Development"
-                subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat."
-              />
-            </ServiceBoxWrapper>
-            <ServiceBoxWrapper>
-              <ServiceBox icon="printer" title="Print" subtitle="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor." />
-            </ServiceBoxWrapper>
+            {uniqueServices.map((service, index) => (
+              <Card header={service.nomservice} title={service.nomservice} text={service.description} />
+                
+            ))}
           </ServiceBoxRow>
         </div>
       </div>
@@ -54,16 +55,6 @@ const Wrapper = styled.section`
 const ServiceBoxRow = styled.div`
   @media (max-width: 860px) {
     flex-direction: column;
-  }
-`;
-const ServiceBoxWrapper = styled.div`
-  width: 20%;
-  margin-right: 5%;
-  padding: 80px 0;
-  @media (max-width: 860px) {
-    width: 100%;
-    text-align: center;
-    padding: 40px 0;
   }
 `;
 const HeaderInfo = styled.div`

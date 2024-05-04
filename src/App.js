@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import TopNavbar from "./components/Nav/TopNavbar.jsx";
 import TopNavbarConnected from "./components/Nav/TopNavbarConnected.jsx";
 import Rdv from "./components/Sections/Rdv.jsx";
+import ServiceFiltre from "./components/Sections/ServiceFiltre.jsx";
 
 export default function App() {
   const user = localStorage.getItem("token");
@@ -34,6 +35,10 @@ export default function App() {
             path="/rdv"
             element={!user ? <Navigate to="/" /> : <Rdv />}
           />
+          <Route
+            path="/services/:nomservice"
+            element={<ServiceFiltre />}
+          />
         </Routes>
       </Router>
     </>
@@ -42,7 +47,7 @@ export default function App() {
 
 function TopNavbarWrapper() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/rdv";
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/rdv" || location.pathname ==="/services/:nomservice";
   if (isLoginPage) {
     return null;
   }
@@ -50,7 +55,7 @@ function TopNavbarWrapper() {
 }
 function TopNavbarWrapperConnected() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/rdv";
+  const isLoginPage = location.pathname === "/rdv" || location.pathname ==="/services/:nomservice";
   if (isLoginPage) {
     return null;
   }
