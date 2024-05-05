@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-scroll";
+import { Link } from "react-scroll"; 
 // Assets
+import {NavLink} from "react-router-dom"
 import CloseIcon from "../../assets/svg/CloseIcon";
-import LogoIcon from "../../assets/svg/Logo";
+import LogoIcon from "../../assets/logo.png";
 
 export default function Sidebar({ sidebarOpen, toggleSidebar }) {
   const handleLogout = () => {
@@ -15,10 +16,7 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
     <Wrapper className="animate darkBg" sidebarOpen={sidebarOpen}>
       <SidebarHeader className="flexSpaceCenter">
         <div className="flexNullCenter">
-          <LogoIcon />
-          <h1 className="whiteColor font20" style={{ marginLeft: "15px" }}>
-            fanatic1
-          </h1>
+        <img src={LogoIcon} alt="" width={100}/>
         </div>
         <CloseBtn onClick={() => toggleSidebar(!sidebarOpen)} className="animate pointer">
           <CloseIcon />
@@ -67,6 +65,19 @@ export default function Sidebar({ sidebarOpen, toggleSidebar }) {
           >
             Services
           </Link>
+        </li>
+        <li className="semiBold font15 pointer">
+          <NavLink
+            onClick={() => toggleSidebar(!sidebarOpen)}
+            className="whiteColor"
+            style={{ padding: "10px 15px" }}
+            to="./rdv"
+            spy={true}
+            smooth={true}
+            offset={-60}
+          >
+            Rendez-vous
+          </NavLink>
         </li>
         <li className="semiBold font15 pointer">
           <Link
