@@ -3,6 +3,7 @@ import axios from 'axios';
 import CardPay from '../Cards/CardPay';
 import { useParams } from 'react-router-dom';
 import TopNavbar from '../Nav/TopNavbarConnectedRdv';
+import styled from "styled-components";
 
 export default function ServiceFiltre() {
   const [filteredServices, setFilteredServices] = useState([]);
@@ -21,12 +22,36 @@ export default function ServiceFiltre() {
   }, [nomservice]);
 
   return (
-    <div>
-        <TopNavbar />
-      <h1>Filtered Services for {nomservice}</h1>
-      {filteredServices.map((service, index) => (
-        <CardPay key={index} header={service.nomservice} title={service.nomservice} text={service.description} />
-      ))}
-    </div>
+    <Wrapper>
+      <TopNavbar />
+      <div className="container">
+        <h1>{nomservice}</h1>
+        <CardContainer className="row textCenter">
+          {filteredServices.map((service, index) => (
+            <CardWrapper key={index} className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <CardPay header={service.nomservice} title={service.nomservice} tag={service.prix} text={service.description}/>
+            </CardWrapper>
+          ))}
+        </CardContainer>
+      </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.section`
+  width: 100%;
+  padding-top: 20px;
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: -15px;
+`;
+
+const CardWrapper = styled.div`
+  flex: 0 0 calc(33.333% - 30px);
+  margin: 15px;
+  width: 600px;
+  height: 400px;
+`;
