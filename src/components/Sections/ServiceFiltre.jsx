@@ -29,7 +29,7 @@ export default function ServiceFiltre() {
         <CardContainer className="row textCenter">
           {filteredServices.map((service, index) => (
             <CardWrapper key={index} className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-              <CardPay header={service.nomservice} title={service.nomservice} tag={service.prix} text={service.description}/>
+              <CardPay header={service.nomservice} title={service.nom} tag={service.prix} text={service.descriptionservice}/>
             </CardWrapper>
           ))}
         </CardContainer>

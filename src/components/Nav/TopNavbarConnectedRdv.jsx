@@ -55,7 +55,7 @@ export default function TopNavbar() {
             </li>
             <li className="semiBold font15 pointer">
               <NavLink activeClass="active" style={{ padding: "10px 15px" }} to="/rdv" spy={true} smooth={true} offset={-80}>
-                Rend de vous
+                Rendez-vous
               </NavLink>
             </li>
             <li className="semiBold font15 pointer">
